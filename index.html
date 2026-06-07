@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destinos Incríveis - Viagens dos Sonhos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <header class="bg-primary bg-gradient text-white py-4">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                <h1 class="h3 mb-0 mb-md-0">
+                    <i class="bi bi-airplane-engines me-2"></i>Aura Viagens e Destinos incriveis
+                </h1>
+           <nav class="d-none d-md-flex align-items-center">
+    <a href="#destaques" class="text-white text-decoration-none me-3 fw-semibold">Destaques</a>
+    <a href="#todos" class="text-white text-decoration-none me-3 fw-semibold">Todos os Destinos</a>
+    <a href="#sobre" class="text-white text-decoration-none me-4 fw-semibold">Sobre</a>
+    <a href="dashboard.html" class="btn btn-warning btn-sm fw-bold shadow-sm text-dark"><i class="bi bi-graph-up-arrow me-1"></i> Dashboard</a>
+</nav>
+                
+            <button class="btn btn-outline-light d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuMobile">
+                    <i class="bi bi-list"></i>
+                </button>
+            </div>
+            
+         
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="menuMobile">
+            <div class="offcanvas-header">
+                    <h5 class="offcanvas-title">Menu</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a class="nav-link" href="#destaques">Destaques</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#todos">Todos os Destinos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#sobre">Sobre</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container my-5">
+      
+        <section id="destaques" class="mb-5">
+            <h2 class="text-center mb-5 display-5 fw-bold text-primary"> Destinos em Destaque</h2>
+            <div id="sliderDestaques" class="carousel slide carousel-fade shadow-lg" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#sliderDestaques" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#sliderDestaques" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#sliderDestaques" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner rounded-4 overflow-hidden" id="carouselInner">
+                  
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#sliderDestaques" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#sliderDestaques" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </button>
+            </div>
+        </section>
+
+       
+        <section id="todos" class="mb-5">
+            <h2 class="text-center mb-5 display-5 fw-bold text-success">🌍 Todos os Destinos</h2>
+            <div class="row g-4" id="listaDestinos">
+              
+            </div>
+        </section>
+
+       
+        <section id="sobre" class="bg-gradient bg-light text-dark p-5 rounded-5 shadow-lg">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <div class="display-6 fw-bold text-primary mb-4"> Sobre o Criador</div>
+                    <p class="lead mb-4">Olá, viajante! Sou apaixonada por descobrir novos horizontes e criei este site para compartilhar os destinos mais incríveis do mundo e suas atrações imperdíveis.</p>
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Maria Santos 
+                            </h5>
+                            <p class="card-text"><strong> Viajante | Estudante de Análise e Desenvolvimento de Sistemas</strong><br>
+                            2026 | Trabalho Prático 1</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <i class="bi bi-globe-americas display-1 text-primary mb-4"></i>
+                    <div class="h2 fw-bold text-success">25+</div>
+                    <p class="lead">Destinos explorados</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>

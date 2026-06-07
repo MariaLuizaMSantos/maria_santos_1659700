@@ -1,0 +1,269 @@
+
+:root {
+    --primary-color: #387adc;
+    --success-color: #198754;
+    --warning-color: #ffc107;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.7;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+}
+
+
+.card-destino {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    height: 100%;
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.card-destino::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--success-color));
+}
+
+.card-destino:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+}
+
+.card-destino img {
+    height: 280px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.card-destino:hover img {
+    transform: scale(1.1);
+}
+
+.card-destino .card-body {
+    padding: 1.75rem;
+}
+
+.card-destino .card-title {
+    font-weight: 800;
+    color: #1a1a1a;
+    margin-bottom: 0.75rem;
+    font-size: 1.4rem;
+}
+
+.destaque-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    box-shadow: 0 8px 25px rgba(255,107,107,0.4);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+
+.carousel-item {
+    height: 550px;
+    min-height: 400px;
+}
+
+.carousel-item img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+}
+
+.carousel-caption {
+    bottom: 4rem;
+    padding: 0 3rem;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    max-width: 600px;
+}
+
+.carousel-caption h5 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-shadow: none;
+    color: white;
+}
+
+.carousel-caption p {
+    font-size: 1.25rem;
+    color: #f8f9fa;
+}
+
+.hero-destino {
+    position: relative;
+    height: 450px;
+    overflow: hidden;
+    border-radius: 25px;
+    margin-bottom: 3rem;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.hero-destino img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.overlay-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent 0%, rgba(0,0,0,0.95) 40%);
+    color: white;
+    padding: 3rem 2rem 2rem;
+}
+
+.overlay-info h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+}
+
+.info-grid {
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    margin-bottom: 3rem;
+}
+
+.info-item {
+    text-align: center;
+    padding: 1.5rem;
+    border-right: 1px solid #eee;
+}
+
+.info-item:last-child {
+    border-right: none;
+}
+
+.info-item i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    display: block;
+    margin-bottom: 0.75rem;
+}
+
+.galeria-fotos {
+    gap: 1.5rem;
+}
+
+.foto-galeria {
+    height: 220px;
+    object-fit: cover;
+    border-radius: 20px;
+    transition: all 0.4s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.foto-galeria:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+
+@media (max-width: 992px) {
+    .carousel-caption h5 {
+        font-size: 2rem;
+    }
+    
+    .overlay-info h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-item {
+        height: 400px;
+    }
+    
+    .carousel-caption {
+        bottom: 2.5rem;
+        padding: 1.5rem;
+        max-width: 90%;
+    }
+    
+    .carousel-caption h5 {
+        font-size: 1.75rem;
+    }
+    
+    .hero-destino {
+        height: 350px;
+    }
+    
+    .card-destino img {
+        height: 240px;
+    }
+    
+    .info-grid {
+        padding: 1.5rem;
+    }
+    
+    .foto-galeria {
+        height: 180px;
+    }
+}
+
+@media (max-width: 576px) {
+    .carousel-caption p {
+        display: none;
+    }
+    
+    .overlay-info {
+        padding: 2rem 1.5rem 1.5rem;
+    }
+    
+    .overlay-info h1 {
+        font-size: 2rem;
+    }
+    
+    .destaque-badge {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+}
+
+/* Animações de entrada */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slide-in-up {
+    animation: slideInUp 0.8s ease-out forwards;
+}
+
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
