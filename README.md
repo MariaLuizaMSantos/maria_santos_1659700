@@ -23,3 +23,8 @@ Gráfico Donut (Distribuição por Níveis/Perfis):
 
 ![dashboard/grafico](assets/img/printsResultado/graficos.jpg.png)
 
+![Pagina incial](assets/img/printsResultado/paginaInicial3.jpg.png)
+
+![Favoritos](assets/img/printsResultado/favoritos.png)
+
+

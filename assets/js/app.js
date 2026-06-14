@@ -303,12 +303,78 @@ const dados = {
 };
 
 document.addEventListener('DOMContentLoaded', function() {
-    if (window.location.pathname.includes('index.html') || window.location.pathname === '/') {
+  
+    gerenciarInterfaceLogin();
+
+    if (window.location.pathname.includes('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('/')) {
         inicializarIndex();
     } else if (window.location.pathname.includes('detalhe.html')) {
         inicializarDetalhe();
+    } else if (window.location.pathname.includes('favoritos.html')) {
+        inicializarFavoritos();
     }
 });
+
+function obterUsuarioLogado() {
+    const usuarioJson = sessionStorage.getItem('usuarioCorrente');
+    return usuarioJson ? JSON.parse(usuarioJson) : null;
+}
+
+function gerenciarInterfaceLogin() {
+    const areaLogin = document.getElementById('area-login');
+    if (!areaLogin) return;
+
+    const usuario = obterUsuarioLogado();
+
+    if (usuario) {
+        areaLogin.innerHTML = `
+            <span class="me-2">Olá, <span class="text-warning fw-bold">${usuario.nome}</span></span>
+            <a href="#" id="btn-logout" class="btn btn-sm btn-outline-light ms-2 py-0">Sair</a>
+        `;
+        document.getElementById('btn-logout').addEventListener('click', function(e) {
+            e.preventDefault();
+            if (typeof logoutUser === 'function') {
+                logoutUser();
+            } else {
+                sessionStorage.removeItem('usuarioCorrente');
+                window.location.href = '/modulos/login/index.html';
+            }
+        });
+    } else {
+        areaLogin.innerHTML = `<a href="/modulos/login/index.html" class="btn btn-sm btn-light fw-bold text-primary px-3">Entrar</a>`;
+    }
+}
+
+function obterFavoritosUsuario() {
+    const usuario = obterUsuarioLogado();
+    if (!usuario) return [];
+    const favs = localStorage.getItem(`favoritos_${usuario.id}`);
+    return favs ? JSON.parse(favs) : [];
+}
+
+function alternarFavorito(idDestino) {
+    const usuario = obterUsuarioLogado();
+    if (!usuario) {
+        alert("Ação Bloqueada! Você precisa efetuar o login para favoritar destinos.");
+        window.location.href = '/modulos/login/index.html';
+        return;
+    }
+
+    let favoritos = obterFavoritosUsuario();
+    const index = favoritos.indexOf(idDestino);
+
+    if (index === -1) {
+        favoritos.push(idDestino); 
+    } else {
+        favoritos.splice(index, 1); 
+    }
+
+    localStorage.setItem(`favoritos_${usuario.id}`, JSON.stringify(favoritos));
+    
+    if (document.getElementById('listaDestinos')) criarListaTodosDestinos();
+    if (window.location.pathname.includes('favoritos.html')) inicializarFavoritos();
+}
+
 
 
 function inicializarIndex() {
@@ -319,7 +385,9 @@ function inicializarIndex() {
 function criarSliderDestaques() {
     const destaques = dados.destinos.filter(destino => destino.destaque);
     const carouselInner = document.getElementById('carouselInner');
+    if (!carouselInner) return;
     
+    carouselInner.innerHTML = '';
     destaques.forEach((destino, index) => {
         const activeClass = index === 0 ? 'active' : '';
         carouselInner.innerHTML += `
@@ -336,34 +404,44 @@ function criarSliderDestaques() {
 
 function criarListaTodosDestinos() {
     const listaDestinos = document.getElementById('listaDestinos');
+    if (!listaDestinos) return;
+    
+    listaDestinos.innerHTML = '';
+    const favoritos = obterFavoritosUsuario();
     
     dados.destinos.forEach((destino, index) => {
         const destaqueBadge = destino.destaque ? '<span class="destaque-badge"> Destaque</span>' : '';
+        const isFavorito = favoritos.includes(destino.id);
+       
+        const iconeCoracao = isFavorito ? 'bi-heart-fill text-danger' : 'bi-heart text-secondary';
+
         listaDestinos.innerHTML += `
             <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 slide-in-up ${`delay-${(index % 4) + 1}`}">
-                <a href="detalhe.html?id=${destino.id}" class="text-decoration-none">
-                    <div class="card card-destino h-100">
-                        <div class="position-relative">
+                <div class="card card-destino h-100">
+                    <div class="position-relative">
+                        <a href="detalhe.html?id=${destino.id}">
                             <img src="${destino.imagem_principal}" class="card-img-top" alt="${destino.nome}">
-                            ${destaqueBadge}
-                        </div>
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">${destino.nome}</h5>
+                        </a>
+                        ${destaqueBadge}
+                        <button onclick="alternarFavorito(${destino.id})" class="btn-favoritar shadow" aria-label="Favoritar">
+                            <i class="bi ${iconeCoracao} fs-4"></i>
+                        </button>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <a href="detalhe.html?id=${destino.id}" class="text-decoration-none text-dark">
+                            <h5 class="card-title hover-primary">${destino.nome}</h5>
                             <p class="card-text flex-grow-1">${destino.descricao}</p>
-                            <div class="mt-auto">
-                                <small class="text-muted">${destino.pais}</small>
-                                <div class="mt-2">
-                                    <span class="badge bg-primary">${destino.nivel}</span>
-                                </div>
-                            </div>
+                        </a>
+                        <div class="mt-auto d-flex justify-content-between align-items-center">
+                            <small class="text-muted"><i class="bi bi-geo-alt me-1"></i>${destino.pais}</small>
+                            <span class="badge bg-primary">${destino.nivel}</span>
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
         `;
     });
 }
-
 
 function inicializarDetalhe() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -380,6 +458,7 @@ function inicializarDetalhe() {
 
 function criarDetalhesDestino(destino) {
     const container = document.getElementById('detalhesDestino');
+    if (!container) return;
     
     container.innerHTML = `
         <div class="col-12">
@@ -440,4 +519,61 @@ function criarDetalhesDestino(destino) {
             </div>
         </div>
     `;
+}
+
+function inicializarFavoritos() {
+    const listaFavs = document.getElementById('listaFavoritos');
+    if (!listaFavs) return;
+
+    const usuario = obterUsuarioLogado();
+    if (!usuario) {
+        listaFavs.innerHTML = `
+            <div class="col-12 text-center py-5">
+                <i class="bi bi-lock display-3 text-muted mb-3"></i>
+                <h3>Área Restrita</h3>
+                <p class="text-muted">Por favor, faça login para visualizar e gerenciar seus destinos favoritos.</p>
+                <a href="/modulos/login/index.html" class="btn btn-primary mt-2">Fazer Login</a>
+            </div>
+        `;
+        return;
+    }
+
+    const favoritosIds = obterFavoritosUsuario();
+    const destinosFavoritados = dados.destinos.filter(d => favoritosIds.includes(d.id));
+
+    if (destinosFavoritados.length === 0) {
+        listaFavs.innerHTML = `
+            <div class="col-12 text-center py-5">
+                <i class="bi bi-heart-break display-3 text-muted mb-3"></i>
+                <h3>Nenhum favorito salvo</h3>
+                <p class="text-muted">Explore nossa lista de destinos e clique no ícone de coração para salvar seus locais preferidos.</p>
+                <a href="index.html" class="btn btn-success mt-2">Ver Destinos</a>
+            </div>
+        `;
+        return;
+    }
+
+    listaFavs.innerHTML = '';
+    destinosFavoritados.forEach((destino, index) => {
+        listaFavs.innerHTML += `
+            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                <div class="card card-destino h-100">
+                    <div class="position-relative">
+                        <img src="${destino.imagem_principal}" class="card-img-top" alt="${destino.nome}">
+                        <button onclick="alternarFavorito(${destino.id})" class="btn-favoritar shadow">
+                            <i class="bi bi-heart-fill text-danger fs-4"></i>
+                        </button>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">${destino.nome}</h5>
+                        <p class="card-text flex-grow-1">${destino.descricao}</p>
+                        <div class="mt-auto d-flex justify-content-between align-items-center">
+                            <small class="text-muted">${destino.pais}</small>
+                            <button onclick="alternarFavorito(${destino.id})" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash me-1"></i>Remover</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
 }

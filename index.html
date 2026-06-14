@@ -9,40 +9,49 @@
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-    <header class="bg-primary bg-gradient text-white py-4">
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-center flex-wrap">
-                <h1 class="h3 mb-0 mb-md-0">
-                    <i class="bi bi-airplane-engines me-2"></i>Aura Viagens e Destinos incriveis
-                </h1>
-           <nav class="d-none d-md-flex align-items-center">
-    <a href="#destaques" class="text-white text-decoration-none me-3 fw-semibold">Destaques</a>
-    <a href="#todos" class="text-white text-decoration-none me-3 fw-semibold">Todos os Destinos</a>
-    <a href="#sobre" class="text-white text-decoration-none me-4 fw-semibold">Sobre</a>
-    <a href="dashboard.html" class="btn btn-warning btn-sm fw-bold shadow-sm text-dark"><i class="bi bi-graph-up-arrow me-1"></i> Dashboard</a>
-</nav>
-                
-            <button class="btn btn-outline-light d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuMobile">
-                    <i class="bi bi-list"></i>
-                </button>
+    <script src="./assets/js/login.js"></script>
+
+<header class="bg-primary bg-gradient text-white py-4">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center flex-wrap">
+            <h1 class="h3 mb-0">
+                <i class="bi bi-airplane-engines me-2"></i>Aura Viagens e Destinos incríveis
+            </h1>
+            <h4>Olá, Maria Luiza</h4>
+            <div class="d-flex align-items-center flex-wrap">
+                <div id="area-login" class="me-4 text-white fw-semibold">
+                    </div>
+
+                <nav class="d-none d-md-flex align-items-center">
+                    <a href="#destaques" class="text-white text-decoration-none me-3 fw-semibold">Destaques</a>
+                    <a href="#todos" class="text-white text-decoration-none me-3 fw-semibold">Todos os Destinos</a>
+                    <a href="favoritos.html" class="text-white text-decoration-none me-3 fw-semibold"><i class="bi bi-heart-fill text-danger me-1"></i>Meus Favoritos</a>
+                    <a href="#sobre" class="text-white text-decoration-none me-4 fw-semibold">Sobre</a>
+                    <a href="dashboard.html" class="btn btn-warning btn-sm fw-bold shadow-sm text-dark"><i class="bi bi-graph-up-arrow me-1"></i> Dashboard</a>
+                </nav>
             </div>
             
-         
+            <button class="btn btn-outline-light d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuMobile">
+                <i class="bi bi-list"></i>
+            </button>
+        </div>
+        
         <div class="offcanvas offcanvas-end" tabindex="-1" id="menuMobile">
-            <div class="offcanvas-header">
-                    <h5 class="offcanvas-title">Menu</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <ul class="nav flex-column">
-                        <li class="nav-item"><a class="nav-link" href="#destaques">Destaques</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#todos">Todos os Destinos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#sobre">Sobre</a></li>
-                    </ul>
-                </div>
+            <div class="offcanvas-header bg-primary text-white">
+                <h5 class="offcanvas-title">Menu</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="nav flex-column">
+                    <li class="nav-item"><a class="nav-link text-dark" href="#destaques">Destaques</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="#todos">Todos os Destinos</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="favoritos.html">Meus Favoritos</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="#sobre">Sobre</a></li>
+                </ul>
             </div>
         </div>
-    </header>
+    </div>
+</header>
 
     <main class="container my-5">
       
